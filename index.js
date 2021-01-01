@@ -78,6 +78,22 @@ function MyArrayPrototype() {
   this.concat = function () {
     // TODO
   }
+
+  this.reverse = function () {
+
+    // Цикл заменяет первый и последний элемент в массиве потом второй и предпоследний и тд. 
+    // В массиве с нечетным количеством элементов он заменит средний элемент сам собой в последней итерации
+    for (let i = 0; i < Math.ceil(this.length / 2); i++) {
+
+      const savedItem = this[i];
+      const deltaI = this.length - 1 - i;
+      this[i] = this[deltaI];
+      this[deltaI] = savedItem;
+
+    }
+
+    return this;
+  }
 }
 
 MyArray.prototype = new MyArrayPrototype();
