@@ -76,7 +76,27 @@ function MyArrayPrototype() {
   }
 
   this.concat = function () {
-    // TODO
+    
+    const newArray = new MyArray();
+
+    for (let i = 0; i < this.length; i++) {
+      newArray.push(this[i]);
+    }
+
+    for (let i = 0; i < arguments.length; i++) {
+
+      // конкатенация для массивов
+      // arguments[i] нужно чтобы не условие не взрывалось если одним из параметров concat подать null
+      if(arguments[i] && arguments[i].length) {
+        for(let j = 0; j < arguments[i].length; j++) {
+          newArray[newArray.length++] = arguments[i][j];
+        }
+      } else {
+        newArray.push(arguments[i]);
+      }
+
+    }
+    return newArray;
   }
 
   this.reverse = function () {
@@ -104,4 +124,6 @@ MyArray.prototype = new MyArrayPrototype();
 // MyArray.prototype.forEach();
 // MyArray.prototype.map();
 
-const arr = new MyArray();
+const arr = new MyArray('ACCESS GRANTED', '0xABCDEF123456789', 'lorem999');
+const arr1 = new MyArray(1, 2, 3);
+const arr2 = new MyArray(true, false, true);
