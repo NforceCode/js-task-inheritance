@@ -87,15 +87,21 @@ function MyArrayPrototype() {
 
       // конкатенация для массивов
       // arguments[i] нужно чтобы не условие не взрывалось если одним из параметров concat подать null
-      if(arguments[i] && arguments[i].length) {
+      if(arguments[i] && typeof arguments[i] !== 'string'){
+
+        if (arguments[i].isMyArray || Array.isArray(arguments[i])) {
+
         for(let j = 0; j < arguments[i].length; j++) {
-          newArray[newArray.length++] = arguments[i][j];
+            newArray.push(arguments[i][j]);
+        }
         }
       } else {
+        // забрасывает в массив все кроме массивов и обьектов
         newArray.push(arguments[i]);
       }
 
     }
+
     return newArray;
   }
 
