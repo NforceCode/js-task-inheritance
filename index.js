@@ -22,6 +22,7 @@ function MyArray() {
 // MyArray.prototype.unshift();
 // MyArray.prototype.shift();
 // MyArray.prototype.concat();
+// MyArray.prototype.reverse();
 
 function MyArrayPrototype() {
 
@@ -120,11 +121,17 @@ function MyArrayPrototype() {
 
     return this;
   }
-}
+
+  this.forEach = function forEach (callback) {
+
+    for (let i = 0; i < this.length; i++) {
+      callback(this[i], i, this);
+    }
+  }
 
 MyArray.prototype = new MyArrayPrototype();
 
-// MyArray.prototype.reverse();
+
 
 // advanced
 // MyArray.prototype.forEach();
