@@ -45,10 +45,16 @@ function MyArrayPrototype() {
 
   this.unshift = function () {
 
-    for(let i=0; i< arguments.length; i++) {
-      this[this.length++] = this[i];
-      this[i] = arguments[i];
+    const startingLength = this.length - 1;
 
+    for (let i = startingLength; i >= 0; i--) {
+      this[i + arguments.length] = this[i];
+    }
+
+    this.length += arguments.length;
+
+    for(let i=0; i< arguments.length; i++) {
+      this[i] = arguments[i];
     }
     return this.length;
   }
