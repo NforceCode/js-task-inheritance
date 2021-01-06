@@ -7,8 +7,8 @@
 function MyArray() {
 
   this.length = 0;
-  this.isMyArray = function (arg) {
-    return this.prototype === arg.prototype;
+  this.isMyArray = function isMyArray(arg) {
+    return MyArray.prototype === arg.__proto__;
   }
 
   for(let i = 0; i < arguments.length; i++) {
