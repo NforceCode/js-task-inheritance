@@ -129,6 +129,18 @@ function MyArrayPrototype() {
     }
   }
 
+  this.map = function map (callback) {
+
+    const newArr = new MyArray();
+
+    for(let i =0; i< this.length; i++) {
+      newArr[i] = callback(this[i], i, this);
+    }
+
+    return newArr;
+  }
+}
+
 MyArray.prototype = new MyArrayPrototype();
 
 
