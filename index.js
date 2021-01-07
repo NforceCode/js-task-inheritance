@@ -142,14 +142,15 @@ function MyArrayPrototype() {
   }
 
   this.flat = function (depth = 1, targetArray = this) {
-    let newArray = new MyArray();
+    const newArray = new MyArray();
 
     for(let i = 0; i < targetArray.length; i++) {
       // 1 уровень вложенности
       if(targetArray.isMyArray(targetArray[i]) && depth > 0) {
         const nestedArray = targetArray.flat(depth -1 , targetArray[i]);
-        //let для того чтобы не потерять поднятые уровни массивов
-        newArray = newArray.concat(nestedArray);
+        for(let j = 0;j < nestedArray.length; j++){
+          newArray.push(nestedArray[j]);
+        }
       }
       else {
         newArray.push(targetArray[i]);
