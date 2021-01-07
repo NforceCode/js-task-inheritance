@@ -140,6 +140,24 @@ function MyArrayPrototype() {
 
     return newArr;
   }
+
+  this.flat = function (depth = 1, targetArray = this) {
+    let newArray = new MyArray();
+
+    for(let i = 0; i < targetArray.length; i++) {
+      // 1 уровень вложенности
+      if(targetArray.isMyArray(targetArray[i]) && depth > 0) {
+        const nestedArray = targetArray.flat(depth -1 , targetArray[i]);
+        //let для того чтобы не потерять поднятые уровни массивов
+        newArray = newArray.concat(nestedArray);
+      }
+      else {
+        newArray.push(targetArray[i]);
+      }
+    }
+
+    return newArray;
+  }
 }
 
 MyArray.prototype = new MyArrayPrototype();
@@ -153,3 +171,7 @@ MyArray.prototype = new MyArrayPrototype();
 const arr = new MyArray('ACCESS GRANTED', '0xABCDEF123456789', 'lorem999');
 const arr1 = new MyArray(1, 2, 3);
 const arr2 = new MyArray(true, false, true);
+
+const nested1 = new MyArray(7, 8, 9);
+const nested2 = new MyArray(4, 5, 6 , nested1);
+const nest = new MyArray(1, 2, 3, nested2);
