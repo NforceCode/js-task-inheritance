@@ -122,17 +122,17 @@ function MyArrayPrototype() {
     return newArr;
   };
 
-  this.flat = function (depth = 1, targetArray = this) {
+  this.flat = function (depth = 1) {
     const newArray = new MyArray();
 
-    for (let i = 0; i < targetArray.length; i++) {
-      if (targetArray.isMyArray(targetArray[i]) && depth > 0) {
-        const nestedArray = targetArray.flat(depth - 1, targetArray[i]);
+    for (let i = 0; i < this.length; i++) {
+      if (this.isMyArray(this[i]) && depth > 0) {
+        const nestedArray = this[i].flat(depth - 1);
         for (let j = 0; j < nestedArray.length; j++) {
           newArray.push(nestedArray[j]);
         }
       } else {
-        newArray.push(targetArray[i]);
+        newArray.push(this[i]);
       }
     }
 
