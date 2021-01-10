@@ -130,7 +130,7 @@ function MyArrayPrototype() {
         for (let j = 0; j < nestedArray.length; j++) {
           newArray.push(nestedArray[j]);
         }
-      } else {
+      } else if(typeof this[i] !== 'undefined'){
         newArray.push(this[i]);
       }
     }
