@@ -152,3 +152,9 @@ const arr2 = new MyArray(true, false, true);
 const nested1 = new MyArray(7, 8, 9);
 const nested2 = new MyArray(4, 5, 6, nested1);
 const nest = new MyArray(1, 2, 3, nested2);
+
+const withempty = new MyArray(1,2,3,4,5);
+const withemptyArray = [1,2,3,4,5, undefined];
+delete withempty[2];
+delete withemptyArray[2];
+
