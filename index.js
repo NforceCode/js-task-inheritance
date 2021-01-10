@@ -6,7 +6,7 @@
 
 function MyArray() {
   this.length = 0;
-  this.isMyArray = function isMyArray(arg = this) {
+  MyArray.isMyArray = function isMyArray(arg) {
     return arg instanceof MyArray;
   };
 
@@ -82,7 +82,7 @@ function MyArrayPrototype() {
     }
 
     for (let i = 0; i < arguments.length; i++) {
-      if (arguments[i] && newArray.isMyArray(arguments[i])) {
+      if (arguments[i] && MyArray.isMyArray(arguments[i])) {
         for (let j = 0; j < arguments[i].length; j++) {
           newArray.push(arguments[i][j]);
         }
@@ -125,7 +125,7 @@ function MyArrayPrototype() {
     const newArray = new MyArray();
 
     for (let i = 0; i < this.length; i++) {
-      if (this.isMyArray(this[i]) && depth > 0) {
+      if (MyArray.isMyArray(this[i]) && depth > 0) {
         const nestedArray = this[i].flat(depth - 1);
         for (let j = 0; j < nestedArray.length; j++) {
           newArray.push(nestedArray[j]);
