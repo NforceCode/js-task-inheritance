@@ -124,16 +124,16 @@ function MyArrayPrototype() {
   this.flat = function (depth = 1) {
     const newArray = new MyArray();
 
-    for (let i = 0; i < this.length; i++) {
-      if (MyArray.isMyArray(this[i]) && depth > 0) {
-        const nestedArray = this[i].flat(depth - 1);
-        for (let j = 0; j < nestedArray.length; j++) {
-          newArray.push(nestedArray[j]);
+    this.forEach((item)=> {
+      if(MyArray.isMyArray(item) && depth > 0) {
+        const nestedArray = item.flat(depth - 1);
+        for(let i = 0; i< nestedArray.length; i++) {
+          newArray.push(nestedArray[i]);
         }
-      } else if(typeof this[i] !== 'undefined'){
-        newArray.push(this[i]);
+      } else if(typeof item !== 'undefined') {
+        newArray.push(item);
       }
-    }
+    });
 
     return newArray;
   };
