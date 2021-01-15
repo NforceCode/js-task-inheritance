@@ -4,34 +4,26 @@
 // Реализовать следующие методы функции конструктора:
 // MyArray.isMyArray(arg);  // подсказка: instanceof
 
-function MyArray() {
-  this.length = 0;
-  MyArray.isMyArray = function isMyArray(arg) {
-    return arg instanceof MyArray;
-  };
-
-  for (let i = 0; i < arguments.length; i++) {
-    this.push(arguments[i]);
+class MyArray {
+  constructor(...args) {
+    this.length = 0;
+    for(let i = 0; i<args.length; i++){
+      this.push(args[i]);
+    }
   }
-}
 
-// Реализовать прототип для создаваемых коллекций, со следующими методами:
-// MyArray.prototype.push();
-// MyArray.prototype.pop(); // tip: delete
-// MyArray.prototype.unshift();
-// MyArray.prototype.shift();
-// MyArray.prototype.concat();
-// MyArray.prototype.reverse();
+  static isMyArray (arg) {
+    return arg instanceof MyArray;
+  }
 
-function MyArrayPrototype() {
-  this.push = function () {
+  push () {
     for (let i = 0; i < arguments.length; i++) {
       this[this.length++] = arguments[i];
     }
     return this.length;
   };
 
-  this.pop = function () {
+  pop() {
     if (this.length === 0) {
       return;
     }
@@ -40,7 +32,7 @@ function MyArrayPrototype() {
     return lastItem;
   };
 
-  this.unshift = function () {
+  unshift() {
 
     for (let i = this.length - 1; i >= 0; i--) {
       this[i + arguments.length] = this[i];
@@ -54,7 +46,7 @@ function MyArrayPrototype() {
     return this.length;
   };
 
-  this.shift = function () {
+  shift() {
     if (this.length === 0) {
       return;
     }
@@ -74,7 +66,7 @@ function MyArrayPrototype() {
     return removedItem;
   };
 
-  this.concat = function () {
+  concat () {
     const newArray = new MyArray();
 
     for (let i = 0; i < this.length; i++) {
@@ -94,7 +86,7 @@ function MyArrayPrototype() {
     return newArray;
   };
 
-  this.reverse = function () {
+  reverse() {
     for (let i = 0; i < Math.ceil(this.length / 2); i++) {
       const savedItem = this[i];
       const deltaI = this.length - 1 - i;
@@ -105,13 +97,13 @@ function MyArrayPrototype() {
     return this;
   };
 
-  this.forEach = function forEach(callback) {
+  forEach(callback) {
     for (let i = 0; i < this.length; i++) {
       callback(this[i], i, this);
     }
   };
 
-  this.map = function map(callback) {
+  map(callback) {
     const newArr = new MyArray();
 
     for (let i = 0; i < this.length; i++) {
@@ -121,7 +113,7 @@ function MyArrayPrototype() {
     return newArr;
   };
 
-  this.flat = function (depth = 1) {
+  flat(depth = 1) {
     const newArray = new MyArray();
 
     this.forEach((item)=> {
@@ -139,7 +131,15 @@ function MyArrayPrototype() {
   };
 }
 
-MyArray.prototype = new MyArrayPrototype();
+
+
+// Реализовать прототип для создаваемых коллекций, со следующими методами:
+// MyArray.prototype.push();
+// MyArray.prototype.pop(); // tip: delete
+// MyArray.prototype.unshift();
+// MyArray.prototype.shift();
+// MyArray.prototype.concat();
+// MyArray.prototype.reverse();
 
 // advanced
 // MyArray.prototype.forEach();
@@ -153,8 +153,4 @@ const nested1 = new MyArray(7, 8, 9);
 const nested2 = new MyArray(4, 5, 6, nested1);
 const nest = new MyArray(1, 2, 3, nested2);
 
-const withempty = new MyArray(1,2,3,4,5);
-const withemptyArray = [1,2,3,4,5, undefined];
-delete withempty[2];
-delete withemptyArray[2];
 
